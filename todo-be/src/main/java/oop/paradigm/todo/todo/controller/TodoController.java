@@ -34,11 +34,6 @@ public class TodoController {
 		return todoService.readTodos();
 	}
 
-	@GetMapping("/trashcan")
-	public Response<TodoListResponse> readTrashTodos() {
-		return todoService.readTrashTodos();
-	}
-
 	@GetMapping("/search")
 	public Response<TodoListResponse> searchTodos(@RequestParam("keyword") String keyword) {
 		return todoService.searchTodos(keyword);
@@ -50,13 +45,8 @@ public class TodoController {
 	}
 
 	@DeleteMapping("/trashcan")
-	public Response<Void> trashTodo(@RequestParam(value = "todoId") Long todoId) {
-		return todoService.trashTodo(todoId);
-	}
-
-	@DeleteMapping("/permanent")
 	public Response<Void> deleteTodo(@RequestParam(value = "todoId") Long todoId) {
-		return todoService.deleteTodo(todoId);
+		return todoService.trashTodo(todoId);
 	}
 
 }
