@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import TodoPage from './TodoPage';
-import { GetTodoApi } from '../api/GetAcitvateTodoApi';
+import { GetTodoApi } from '../api/GetTodoApi';
 
 function Layout({ children }) {
   const [currentDate, setCurrentDate] = useState(new Date());

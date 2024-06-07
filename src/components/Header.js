@@ -37,15 +37,15 @@ function Header({ currentDate, setCurrentDate }) {
     navigate('/todo');
   };
 
-  const trashCanClickHandler = () => {
-    navigate('/trashcan');
-  };
-
   const logoutHandler = () => {
-    window.alert('로그아웃 되었습니다.');
-    window.localStorage.removeItem('accessToken');
-    window.localStorage.removeItem('userName');
-    setLoggedIn(false);
+    const confirm = window.confirm('로그아웃 하시겠습니까?');
+
+    if (confirm) {
+      window.alert('로그아웃 되었습니다.');
+      window.localStorage.removeItem('accessToken');
+      window.localStorage.removeItem('userName');
+      setLoggedIn(false);
+    }
   };
 
   const loginRedirectHandler = () => {
@@ -89,9 +89,6 @@ function Header({ currentDate, setCurrentDate }) {
                 />
               </MenuItem>
             </Menu>
-            <Button color="inherit" onClick={trashCanClickHandler}>
-              휴지통
-            </Button>
             <Button color="inherit" onClick={logoutHandler}>
               로그아웃
             </Button>

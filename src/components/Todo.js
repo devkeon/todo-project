@@ -16,8 +16,12 @@ function Todo({ todo, id, todoList, setTodoList }) {
   const [readOnly, setReadOnly] = useState(true);
 
   const deleteEventHandler = async () => {
-    await DeleteTodoApi(id);
-    setTodoList(todoList.filter((beforeTodo) => beforeTodo.todoId !== id));
+    const confirm = window.confirm(`${item.title}을 삭제하시겠습니까?`);
+
+    if (confirm) {
+      await DeleteTodoApi(id);
+      setTodoList(todoList.filter((beforeTodo) => beforeTodo.todoId !== id));
+    }
   };
 
   const editToggleHandler = async () => {

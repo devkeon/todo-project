@@ -1,8 +1,8 @@
 import { Button, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { TodoCreateApi } from '../api/TodoCreateApi';
-import { TrashTodoApi } from '../api/DeleteTodoApi';
+import { DeleteTodoApi } from '../api/DeleteTodoApi';
 import { useNavigate } from 'react-router-dom';
+import { TodoCreateApi } from '../api/TodoCreateApi';
 
 function AddTodo({ date, todoList, setTodoList }) {
   const [item, setItem] = useState({ title: '' });
@@ -47,7 +47,7 @@ function AddTodo({ date, todoList, setTodoList }) {
     if (confirm) {
       const needToDelete = todoList.filter((target) => target.date === date);
 
-      needToDelete.map(async (target) => await TrashTodoApi(target.todoId));
+      needToDelete.map(async (target) => await DeleteTodoApi(target.todoId));
 
       const newTodoList = todoList.filter((target) => target.date !== date);
 
