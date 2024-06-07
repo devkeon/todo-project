@@ -12,14 +12,10 @@ public interface TodoService {
 
 	Response<TodoListResponse> readTodos();
 
-	Response<TodoListResponse> readTrashTodos();
-
 	Response<TodoListResponse> searchTodos(String keyword);
 
 	Response<TodoInfoResponse> updateTodo(TodoUpdateRequest updateRequest);
 
 	Response<Void> trashTodo(Long todoId);
-
-	Response<Void> deleteTodo(Long todoId);
 
 }

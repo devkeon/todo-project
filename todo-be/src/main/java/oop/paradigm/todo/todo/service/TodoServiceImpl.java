@@ -63,17 +63,6 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public Response<TodoListResponse> readTrashTodos() {
-
-		List<TodoInfoResponse> list = todoRepository.findTrashTodos(securityUtil.getContextMember().getUserId())
-			.stream()
-			.map(TodoInfoResponse::fromEntity)
-			.toList();
-
-		return Response.ok(new TodoListResponse(list));
-	}
-
-	@Override
 	public Response<TodoListResponse> searchTodos(String keyword) {
 
 		List<TodoInfoResponse> list = todoRepository.searchTodo(keyword).stream()
@@ -112,14 +101,6 @@ public class TodoServiceImpl implements TodoService {
 			.orElseThrow(() -> new RuntimeException("no such todo"));
 
 		todoRepository.delete(todo);
-
-		return Response.ok();
-	}
-
-	@Override
-	public Response<Void> deleteTodo(Long todoId) {
-
-		todoRepository.deleteTodo(todoId);
 
 		return Response.ok();
 	}
