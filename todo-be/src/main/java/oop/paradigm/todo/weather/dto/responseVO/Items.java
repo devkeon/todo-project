@@ -1,19 +1,14 @@
 package oop.paradigm.todo.weather.dto.responseVO;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Response {
-
-	private Header header;
-	private Body body;
-
+public class Items {
+	private List<Item> item;
 }

@@ -11,7 +11,7 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class HeaderVO {
+public class Header {
 	private String resultCode;
 	private String resultMsg;
 }

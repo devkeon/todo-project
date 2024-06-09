@@ -1,7 +1,5 @@
 package oop.paradigm.todo.weather.dto.responseVO;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +11,10 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BodyVO {
+public class Body {
 	private String dataType;
-	private List<ItemVO> items;
+	private Items items;
+	private Integer pageNo;
+	private Integer numOfRows;
+	private Integer totalCount;
 }

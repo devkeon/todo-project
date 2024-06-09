@@ -11,7 +11,7 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemVO {
+public class Item {
 
 	private String baseDate;
 	private String baseTime;
