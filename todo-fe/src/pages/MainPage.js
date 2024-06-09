@@ -26,11 +26,11 @@ function MainPage() {
 
   return (
     <div className="App">
-      <Paper style={{ margin: 16, padding: 16 }}>
+      <Paper style={{ margin: 16, padding: 16,backgroundColor}}>
         <Container maxWidth="md">
           <AddTodo add={add} />
           <div className="TodoList">
-            <Paper>
+            <Paper style>
               <List>
                 {items.map((item) => (
                   <Todo item={item} key={item.id} del={del} />

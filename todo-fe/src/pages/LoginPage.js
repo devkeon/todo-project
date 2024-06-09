@@ -1,8 +1,52 @@
 import React, { useState } from 'react';
 import { LoginApi } from '../api/LoginApi';
 import { useNavigate } from 'react-router-dom';
-import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import { Button, Container, Grid, TextField, Typography,Paper } from '@mui/material';
 import kakaoLogin from '../assets/images/kakao_logo.svg';
+import { styled } from '@mui/system';
+
+
+const StyledContainer = styled(Container)({
+  marginTop: '16%',
+  backgroundColor: 'white',
+});
+
+const StyledPaper = styled(Paper)({
+  padding: 20,
+  backgroundColor: '#D8EFD3',
+});
+
+const StyledTextField = styled(TextField)({
+  backgroundColor: '#F1F8E8',
+});
+
+const StyledButton = styled(Button)({
+  backgroundColor: '#55AD9B',
+  marginLeft:120,
+  width: '120px',
+  color: 'white',
+  fontWeight: 500,
+  '&:hover':{
+    backgroundColor: '#4d9989',
+    color: 'white',
+  },
+});
+
+const StyledTodoLoginTypography = styled(Typography)({
+  fontWeight: 700,
+  fontSize: 50,
+  fontFamily: "'Fantasy', sans-serif",
+  color: '#3c786b',
+  textAlign: 'center',
+});
+
+const StyledOrTypography = styled(Typography)({
+  color: '#3c786b',
+  fontWeight: 300,
+});
+
+const StyledGrid = styled(Grid)({
+});
 
 function LoginPage() {
   const [userName, setUserName] = useState('');
@@ -33,64 +77,62 @@ function LoginPage() {
   };
 
   return (
-    <Container component="main" maxWidth="xs" style={{ marginTop: '8%' }}>
-      <Grid container justifyContent={'center'} margin={'4px'}>
-        <Typography component="h1" variant="h5" style={{ textAlign: 'center' }}>
-          TODO 로그인
-        </Typography>
-      </Grid>
-      <form onSubmit={loginSubmitHandler}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              variant="outlined"
-              required
-              fullWidth
-              id="userName"
-              name="userName"
-              label="유저 이름"
-              onChange={(e) => setUserName(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              fullWidth
-              id="password"
-              name="password"
-              autoComplete="password"
-              label="비밀번호"
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Button type="submit" fullWidth>
-              로그인
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
-      <Grid container>
-        <Grid item xs={12} justifyContent="center">
-          <Typography
-            style={{ textAlign: 'center' }}
-            margin={'2px'}
-            padding={'2px'}
-          >
-            or
-          </Typography>
-        </Grid>
-        <Grid onClick={kakaoLoginHandler}>
-          <img src={kakaoLogin} alt="kakao_login" width={'100%'} />
-        </Grid>
-      </Grid>
-      <Grid>
-        <Button type="button" onClick={signUpHandler} fullWidth>
-          회원 가입
-        </Button>
-      </Grid>
-    </Container>
+    <StyledContainer component="main" maxWidth="xs">
+      <StyledPaper>
+        <StyledGrid container justifyContent={'center'}>
+          <StyledTodoLoginTypography component="h1" variant="h5">
+            TODO-LIST
+          </StyledTodoLoginTypography>
+        </StyledGrid>
+        <form onSubmit={loginSubmitHandler}>
+          <StyledGrid container spacing={2}>
+            <StyledGrid item xs={12}>
+              <StyledTextField
+                variant="outlined"
+                required
+                fullWidth
+                id="userName"
+                name="userName"
+                label="아이디"
+                onChange={(e) => setUserName(e.target.value)}
+              />
+            </StyledGrid>
+            <StyledGrid item xs={12}>
+              <StyledTextField
+                required
+                fullWidth
+                id="password"
+                name="password"
+                autoComplete="password"
+                label="비밀번호"
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </StyledGrid>
+            <StyledGrid item xs={12}>
+              <StyledButton type="submit">
+                로그인
+              </StyledButton>
+            </StyledGrid>
+          </StyledGrid>
+        </form>
+        <StyledGrid container>
+          <StyledGrid item xs={12} justifyContent="center">
+            <StyledOrTypography sx={{ textAlign: 'center' }}>
+              or
+            </StyledOrTypography>
+          </StyledGrid>
+          <StyledGrid onClick={kakaoLoginHandler}>
+            <img src={kakaoLogin} alt="kakao_login" width="100%" />
+          </StyledGrid>
+        </StyledGrid>
+        <StyledGrid>
+          <StyledButton type="button" onClick={signUpHandler}>
+            회원 가입
+          </StyledButton>
+        </StyledGrid>
+      </StyledPaper>
+    </StyledContainer>
   );
 }
 

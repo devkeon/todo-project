@@ -4,6 +4,74 @@ import { DeleteTodoApi } from '../api/DeleteTodoApi';
 import { useNavigate } from 'react-router-dom';
 import { TodoCreateApi } from '../api/TodoCreateApi';
 
+import { styled } from '@mui/system';
+
+const StyledContainer = styled(Container)({
+  borderRadius:40,
+  backgroundColor:'#E6FFE6',
+  color:'green',
+  margin: 10,
+  padding: 1,
+});
+
+const StyledPlusGrid = styled(Grid)({
+  borderRadius:70,
+  backgroundColor:'#FFFFE0',
+  margin: 6,
+  padding: 20,
+});
+
+const StyledDeleteGrid = styled(Grid)({
+  margin: 6,
+  padding: 20,
+});
+
+const StyledTextField = styled(TextField)({
+  width: '100%',
+  backgroundColor:'white',
+});
+
+const StyledPlusButton = styled(Button)({
+  width: '100%',
+  border: 'none',
+  top: '15%',
+  backgroundColor: '#66BB6A',
+  borderRadius: 20,
+  color: 'white',
+  fontWeight: 500,
+  boxShadow: '0px 4px 8px #0000001A', 
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    backgroundColor: '#558B2F',
+    color: 'black',
+    boxShadow: '0px 8px 16px #0000001A',
+  },
+  '&:active': {
+    boxShadow: '0px 4px 8px #0000001A',
+    transform: 'translateY(2px)',
+  },
+});
+
+const StyledDeleteButton = styled(Button)({
+  marginRight:10,
+  border: 'none',
+  backgroundColor: '#66BB6A',
+  borderRadius: 20,
+  color: 'white',
+  fontWeight: 500,
+  boxShadow: '0px 4px 8px #0000001A', 
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    backgroundColor: '#558B2F',
+    color: 'black',
+    boxShadow: '0px 8px 16px #0000001A',
+  },
+  '&:active': {
+    boxShadow: '0px 4px 8px #0000001A',
+    transform: 'translateY(2px)',
+  },
+});
+
 function AddTodo({ date, todoList, setTodoList }) {
   const [item, setItem] = useState({ title: '' });
   const navigate = useNavigate();
@@ -56,10 +124,10 @@ function AddTodo({ date, todoList, setTodoList }) {
   };
 
   return (
-    <Container style={{ margin: 10, padding: 10 }}>
-      <Grid container style={{ margin: 6, padding: 6 }}>
+    <StyledContainer>
+      <StyledPlusGrid container>
         <Grid xs={10} md={11} item style={{ paddingRight: 16 }}>
-          <TextField
+          <StyledTextField
             placeholder="추가할 TODO를 입력해주세요."
             fullWidth
             onChange={onInputChange}
@@ -68,27 +136,25 @@ function AddTodo({ date, todoList, setTodoList }) {
           />
         </Grid>
         <Grid xs={1} md={1} item>
-          <Button fullWidth variant="outlined" onClick={onButtonClick}>
+          <StyledPlusButton fullWidth variant="outlined" onClick={onButtonClick}>
             +
-          </Button>
+          </StyledPlusButton>
         </Grid>
-      </Grid>
-      <Grid
+      </StyledPlusGrid>
+      <StyledDeleteGrid
         container
         alignItems="center"
-        justifyContent={'space-between'}
-        style={{ margin: 6, padding: 6 }}
-      >
+        justifyContent='space-between'>
         <Grid>
-          <Typography style={{ paddingRight: 16 }}>{date}</Typography>
+          <Typography style={{ paddingRight: 16, fontSize:30, fontStyle:'bold',}}>{date} 일정</Typography>
         </Grid>
         <Grid>
-          <Button fullWidth onClick={deleteAllHandler}>
+          <StyledDeleteButton fullWidth onClick={deleteAllHandler}>
             일괄 삭제
-          </Button>
+          </StyledDeleteButton>
         </Grid>
-      </Grid>
-    </Container>
+      </StyledDeleteGrid>
+    </StyledContainer>
   );
 }
 

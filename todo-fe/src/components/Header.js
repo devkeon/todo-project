@@ -10,6 +10,25 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MyCalendar from './MyCalendar';
 import { WeatherApi } from '../api/WeatherApi';
+import { styled } from '@mui/system';
+
+const StyledToolbar = styled(Toolbar)({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: '100px',
+  backgroundColor: '#55AD9B',
+});
+
+const StyledTodoTypography = styled(Typography)({
+  textShadow: '-3px -3px 0px black,3px -3px 0px black,-3px 3px 0px black,3px 3px 0px black',
+  fontWeight: 700,
+  fontSize: 80,
+  fontFamily: "Fantasy, sans-serif",
+  color: '#FFFFE0',
+  textAlign: 'center',
+  letterSpacing:10,
+});
 
 function Header({ currentDate, setCurrentDate }) {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -65,15 +84,15 @@ function Header({ currentDate, setCurrentDate }) {
 
   return (
     <AppBar position="static">
-      <Toolbar>
-        <Typography
+      <StyledToolbar>
+        <StyledTodoTypography
           onClick={logoClickHandler}
           variant="h6"
           component="div"
           sx={{ flexGrow: 1 }}
         >
-          TODO
-        </Typography>
+          TODO LIST
+        </StyledTodoTypography>
         <Typography sx={{ mx: 2 }}>현재 기온: {temperature}</Typography>
         {rainAmount ? (
           <Typography sx={{ mx: 2 }}>현재 강수량: {rainAmount}</Typography>
@@ -115,7 +134,7 @@ function Header({ currentDate, setCurrentDate }) {
             로그인
           </Button>
         )}
-      </Toolbar>
+      </StyledToolbar>
     </AppBar>
   );
 }

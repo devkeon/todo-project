@@ -10,6 +10,20 @@ import {
 import React, { useState } from 'react';
 import { DeleteTodoApi } from '../api/DeleteTodoApi';
 import { EditTodoApi } from '../api/EditTodoApi';
+import { styled } from '@mui/system';
+
+const StyledListItem = styled(ListItem)({
+  backgroundColor: '#FFFFE0',
+  margin: '15px 0',
+  borderRadius: 4,
+  boxShadow: '0 2px 4px #0000001A',
+});
+
+const StyledInputBase = styled(InputBase)({
+  padding: '6px 10px',
+  borderRadius: 4,
+  backgroundColor: '#f9f9f9',
+});
 
 function Todo({ todo, id, todoList, setTodoList }) {
   const [item, setItem] = useState(todo);
@@ -82,10 +96,10 @@ function Todo({ todo, id, todoList, setTodoList }) {
   };
 
   return (
-    <ListItem>
+    <StyledListItem>
       <Checkbox checked={item.done} onChange={checkboxEventHandler} />
       <ListItemText>
-        <InputBase
+        <StyledInputBase
           inputProps={{ 'aria-label': 'naked', readOnly: readOnly }}
           type="text"
           id={item.id}
@@ -105,7 +119,7 @@ function Todo({ todo, id, todoList, setTodoList }) {
           <DeleteOutline />
         </IconButton>
       </ListItemSecondaryAction>
-    </ListItem>
+    </StyledListItem>
   );
 }
 
