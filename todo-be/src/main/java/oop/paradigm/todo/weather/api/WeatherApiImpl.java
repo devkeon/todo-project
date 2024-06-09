@@ -4,17 +4,25 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import oop.paradigm.todo.weather.dto.WeatherApiResponse;
+import lombok.extern.slf4j.Slf4j;
+import oop.paradigm.todo.weather.dto.responseVO.WeatherResponse;
 
+@Slf4j
 @Component
-public class WeatherApi {
+public class WeatherApiImpl implements WeatherApi{
 
 	private final RestTemplate restTemplate = new RestTemplate();
 
-	public WeatherApiResponse getSeoulWeather(String url, Map<String, ?> requestVariable) {
+	@Override
+	public WeatherResponse getSeoulWeather(String url, Map<String, ?> requestVariable) {
 
-		return restTemplate.getForObject(url, WeatherApiResponse.class, requestVariable);
+		String fullUrl = UriComponentsBuilder.fromHttpUrl(url)
+			.buildAndExpand(requestVariable)
+			.toUriString();
+
+		return restTemplate.getForObject(fullUrl, WeatherResponse.class);
 	}
 
 }
