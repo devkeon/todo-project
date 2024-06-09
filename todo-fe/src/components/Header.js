@@ -9,16 +9,27 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MyCalendar from './MyCalendar';
+import { WeatherApi } from '../api/WeatherApi';
 
 function Header({ currentDate, setCurrentDate }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [temperature, setTemperature] = useState(0.0);
+  const [rainAmount, setRainAmount] = useState(0.0);
 
   const open = Boolean(anchorEl);
 
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
     setLoggedIn(!!token);
+
+    const weatherApiSend = async () => {
+      const resp = await WeatherApi();
+
+      setTemperature(resp.data.temperature);
+      setRainAmount(resp.data.rainAmount);
+    };
+    weatherApiSend();
   }, []);
 
   const navigate = useNavigate();
@@ -63,6 +74,12 @@ function Header({ currentDate, setCurrentDate }) {
         >
           TODO
         </Typography>
+        <Typography sx={{ mx: 2 }}>현재 기온: {temperature}</Typography>
+        {rainAmount ? (
+          <Typography sx={{ mx: 2 }}>현재 강수량: {rainAmount}</Typography>
+        ) : (
+          <></>
+        )}
         {loggedIn ? (
           <>
             <Button color="inherit" onClick={handleClickTitle}>

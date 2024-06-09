@@ -15,5 +15,8 @@ public class ResponseVO {
 
 	private HeaderVO header;
 	private BodyVO body;
+	private Integer pageNo;
+	private Integer numOfRows;
+	private Integer totalCount;
 
 }
