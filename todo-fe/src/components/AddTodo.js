@@ -28,7 +28,7 @@ const StyledDeleteGrid = styled(Grid)({
 
 const StyledTextField = styled(TextField)({
   width: '100%',
-  backgroundColor:'white',
+  backgroundColor:'#FFFFE0',
 });
 
 const StyledPlusButton = styled(Button)({
