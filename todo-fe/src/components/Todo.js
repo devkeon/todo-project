@@ -22,7 +22,7 @@ const StyledListItem = styled(ListItem)({
 const StyledInputBase = styled(InputBase)({
   padding: '6px 10px',
   borderRadius: 4,
-  backgroundColor: '#f9f9f9',
+  backgroundColor: '#FFFFE0',
 });
 
 function Todo({ todo, id, todoList, setTodoList }) {
