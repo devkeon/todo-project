@@ -21,13 +21,14 @@ const StyledToolbar = styled(Toolbar)({
 });
 
 const StyledTodoTypography = styled(Typography)({
-  textShadow: '-3px -3px 0px black,3px -3px 0px black,-3px 3px 0px black,3px 3px 0px black',
+  textShadow:
+    '-3px -3px 0px black,3px -3px 0px black,-3px 3px 0px black,3px 3px 0px black',
   fontWeight: 700,
   fontSize: 80,
-  fontFamily: "Fantasy, sans-serif",
+  fontFamily: 'sans-serif',
   color: '#FFFFE0',
   textAlign: 'center',
-  letterSpacing:10,
+  letterSpacing: 10,
 });
 
 function Header({ currentDate, setCurrentDate }) {
