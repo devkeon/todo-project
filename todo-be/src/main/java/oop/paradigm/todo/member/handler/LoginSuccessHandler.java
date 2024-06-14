@@ -32,8 +32,8 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 	private final JwtTokenProvider jwtTokenProvider;
 	private final ObjectMapper objectMapper;
 
-	// @Value("${jwt.cookie.expiration}")
-	// private Integer COOKIE_EXPIRATION;
+	@Value("${jwt.cookie.expiration}")
+	private Integer COOKIE_EXPIRATION;
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -48,7 +48,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 		Authentication genAuthentication = jwtTokenProvider.createAuthentication(member);
 
 		String accessToken = jwtTokenProvider.generateAccessToken(genAuthentication);
-		// String refreshToken = jwtTokenProvider.generateRefreshToken();
+		String refreshToken = jwtTokenProvider.generateRefreshToken();
 
 		response.setHeader("Authorization", accessToken);
 		response.setCharacterEncoding("UTF-8");
@@ -63,17 +63,17 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 			throw new RuntimeException(e);
 		}
 
-		// ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
-		// 	.path("/")
-		// 	.httpOnly(true)
-		// 	.maxAge(COOKIE_EXPIRATION)
-		// 	.sameSite("Lax")
-		// 	.secure(false)
-		// 	.build();
-		//
-		// response.setHeader("Set-Cookie", cookie.toString());
-		//
-		// member.updateRefreshToken(refreshToken);
+		ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
+			.path("/")
+			.httpOnly(true)
+			.maxAge(COOKIE_EXPIRATION)
+			.sameSite("Lax")
+			.secure(false)
+			.build();
+
+		response.setHeader("Set-Cookie", cookie.toString());
+
+		member.updateRefreshToken(refreshToken);
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}

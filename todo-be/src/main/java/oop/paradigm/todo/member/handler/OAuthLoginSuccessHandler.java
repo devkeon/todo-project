@@ -42,16 +42,16 @@ public class OAuthLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 			String accessToken = jwtTokenProvider.generateAccessToken(authentication1);
 
-			// String refreshToken = jwtTokenProvider.generateRefreshToken();
-			//
-			// ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
-			// 	.path("/")
-			// 	.httpOnly(true)
-			// 	.maxAge(COOKIE_EXPIRATION)
-			// 	.secure(true)
-			// 	.build();
-			//
-			// response.setHeader("Set-Cookie", cookie.toString());
+			String refreshToken = jwtTokenProvider.generateRefreshToken();
+
+			ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
+				.path("/")
+				.httpOnly(true)
+				.maxAge(COOKIE_EXPIRATION)
+				.secure(true)
+				.build();
+
+			response.setHeader("Set-Cookie", cookie.toString());
 
 			String redirectUrl = "http://localhost:3000/oauth/callback?token=" + accessToken;
 

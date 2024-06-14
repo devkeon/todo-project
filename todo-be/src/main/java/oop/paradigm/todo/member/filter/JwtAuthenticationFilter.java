@@ -32,7 +32,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	private Integer COOKIE_EXPIRATION;
 
 	protected List<String> filterPassList = List.of("/api", "/api/login", "/", "/login", "/oauth2/authorization/kakao",
-		"/login/oauth2/code/kakao", "/favicon.ico", "/api/sign-up", "/api/main/challenge", "/api/feed/all");
+		"/login/oauth2/code/kakao", "/favicon.ico", "/api/sign-up", "/api/weather");
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -55,14 +55,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 
-			// String refreshToken = String.valueOf(jwtTokenProvider.extractRefreshToken(request));
+			String refreshToken = String.valueOf(jwtTokenProvider.extractRefreshToken(request));
 
-			// if (refreshToken == null){
-			// 	throw new RuntimeException("refresh token required");
-			// }
+			if (refreshToken == null){
+				throw new RuntimeException("refresh token required");
+			}
 
 			response.setHeader("Authorization", accessToken);
-			// response.setHeader("Set-Cookie", refreshToken);
+			response.setHeader("Set-Cookie", refreshToken);
 
 		// access token 만료 흐름
 		} catch (ExpiredJwtException e){
@@ -95,15 +95,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 			response.setHeader("Authorization", generatedAccessToken);
 
-			// ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
-			// 	.path("/")
-			// 	.httpOnly(true)
-			// 	.maxAge(COOKIE_EXPIRATION)
-			// 	.sameSite("Lax")
-			// 	.secure(false)
-			// 	.build();
-			//
-			// response.setHeader("Set-Cookie", String.valueOf(cookie));
+			ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
+				.path("/")
+				.httpOnly(true)
+				.maxAge(COOKIE_EXPIRATION)
+				.sameSite("Lax")
+				.secure(false)
+				.build();
+
+			response.setHeader("Set-Cookie", String.valueOf(cookie));
 
 			SecurityContextHolder.getContext().setAuthentication(createdAuthentication);
 

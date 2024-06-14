@@ -67,8 +67,7 @@ public class SecurityConfig {
 					.requestMatchers("/", "/css/**", "/images/**", "/js/**",
 						"/index.html",
 						"/**",
-						"/favicon.ico", "/swagger-ui/**", "/api", "/api/login", "/api/sign-up", "/api/main/**",
-						"/ws/**", "/api/feed/**")
+						"/favicon.ico", "/swagger-ui/**", "/api", "/api/login", "/api/sign-up", "/api/weather")
 					.permitAll()
 					.anyRequest()
 					.authenticated()
